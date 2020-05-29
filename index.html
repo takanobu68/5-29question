@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// (1) for...in文について
+		// オブジェクトのプロパティに対して、順不同で反復処理を行う
+
+		const obj = {
+			first: 1,
+			second: 2,
+			third: 3
+		};
+
+		for (const key in obj) {
+			console.log(`key:${key},value:${obj[key]}`);
+		}
+
+		// (2)問題点
+		// オブジェクトは何らかのオブジェクトを継承しているため、
+		// オブジェクトのプロパティを列挙する場合に親オブジェクトまで列挙可能な
+		// プロパティを探しに行き、可能な物があれば列挙してしまう
+		// その為意図しない結果になる可能性がある
+
+		// (3)解決策
+		// Objectの静的メソッドであるkeys,values,entriesを利用する
+		// 上記の静的メソッドは引数のオブジェクト自身がもっている列挙可能な
+		// プロパティの配列を返してくれる
+
+		console.log(Object.keys(obj)) // ["first","second","third"];
+		console.log(Object.values(obj)) // [1,2,3]
+		console.log(Object.entries(obj)) // [["first:1"],["second",2],[third,3]]
+
+		// この配列に対して操作を行えばよい
+		Object.keys(obj).forEach(value => {
+			console.log(value);
+		})
+
+	</script>
+</body>
+
+</html>
